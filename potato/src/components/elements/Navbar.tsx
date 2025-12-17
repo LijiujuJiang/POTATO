@@ -1,99 +1,186 @@
 import {
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
-} from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import logo from "../../assets/icon-logo.svg";
-import logo_home from "../../assets/icon_home.svg";
-import logo_book from "../../assets/icon_book.svg";
+  AppBar,
+  Box,
+  Toolbar,
+  Typography,
+  IconButton,
+  Drawer,
+} from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import { Link, useLocation } from "react-router-dom";
+import { useState } from "react";
+import icon_logo from "../../assets/icon-logo.svg";
+import icon_home from "../../assets/icon_home.svg";
+import icon_book from "../../assets/icon_book.svg";
 
-const navigation = [
-  { name: "Home", href: "#home", icon: logo_home, current: true },
-  { name: "Projects", href: "#projects", icon: logo_book, current: false },
-  { name: "3", href: "#3", current: false },
-  { name: "4", href: "#4", current: false },
+const navItems = [
+  { label: "Home", icon: icon_home, path: "/" },
+  { label: "Projects", icon: icon_book, path: "/projects" },
 ];
 
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(" ");
-}
-
 export const Navbar = () => {
+  const { pathname } = useLocation();
+  const [open, setOpen] = useState(false);
+
   return (
-    <Disclosure
-      as="nav"
-      className="relative bg-gray-800 dark:bg-gray-800/50 dark:after:pointer-events-none dark:after:absolute dark:after:inset-x-0 dark:after:bottom-0 dark:after:h-px dark:after:bg-white/10"
-    >
-      <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-        <div className="relative flex h-16 items-center justify-between">
-          <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-            {/* Mobile menu button*/}
-            <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-white/5 hover:text-white focus:outline-2 focus:-outline-offset-1 focus:outline-indigo-500">
-              <span className="absolute -inset-0.5" />
-              <span className="sr-only">Open main menu</span>
-              <Bars3Icon
-                aria-hidden="true"
-                className="block size-6 group-data-open:hidden"
-              />
-              <XMarkIcon
-                aria-hidden="true"
-                className="hidden size-6 group-data-open:block"
-              />
-            </DisclosureButton>
-          </div>
-          <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-            <div className="flex shrink-0 items-center">
-              <img alt="Your Company" src={logo} className="h-8 w-auto" />
-            </div>
-            <div className="hidden sm:ml-6 sm:block">
-              <div className="flex space-x-4">
-                {navigation.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    aria-current={item.current ? "page" : undefined}
-                    className={classNames(
-                      item.current
-                        ? "bg-gray-900 text-white dark:bg-gray-950/50"
-                        : "text-gray-300 hover:bg-white/5 hover:text-white",
-                      "flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium",
-                    )}
-                  >
-                    <img
-                      src={item.icon}
-                      className="h-8 w-auto"
-                    />
-
-                    {item.name}
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <DisclosurePanel className="sm:hidden">
-        <div className="space-y-1 px-2 pt-2 pb-3">
-          {navigation.map((item) => (
-            <DisclosureButton
-              key={item.name}
-              as="a"
-              href={item.href}
-              aria-current={item.current ? "page" : undefined}
-              className={classNames(
-                item.current
-                  ? "bg-gray-900 text-white dark:bg-gray-950/50"
-                  : "text-gray-300 hover:bg-white/5 hover:text-white",
-                "block rounded-md px-3 py-2 text-base font-medium",
-              )}
+    <>
+      <AppBar
+        position="sticky"
+        elevation={0}
+        sx={{
+          backgroundColor: "#2d2d2d",
+          borderBottom: "1px solid rgba(212, 43, 238, 0.08)",
+          boxShadow: "0 2px 20px #f8648e89",
+        }}
+      >
+        <Toolbar
+          sx={{
+            maxWidth: 1200,
+            width: "100%",
+            mx: "auto",
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
+          {/* Logo */}
+          <Box display="flex" alignItems="center" gap={1}>
+            <Box
+              component="img"
+              src={icon_logo}
+              alt="logo"
+              sx={{ width: 36, height: 36 }}
+            />
+            <Typography
+              variant="h6"
+              sx={{
+                fontWeight: 600,
+                letterSpacing: 1,
+                color: "#fff",
+                fontSize: { xs: 16, sm: 18 },
+              }}
             >
-              {item.name}
-            </DisclosureButton>
-          ))}
-        </div>
-      </DisclosurePanel>
-    </Disclosure>
+              白开水不爱喝开水
+            </Typography>
+          </Box>
+
+          {/* Desktop Navigation */}
+          <Box
+            sx={{
+              display: { xs: "none", md: "flex" },
+              gap: 4,
+            }}
+          >
+            {navItems.map((item) => {
+              const active = pathname === item.path;
+
+              return (
+                <Box
+                  key={item.path}
+                  component={Link}
+                  to={item.path}
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 1.2,
+                    textDecoration: "none",
+                    color: active
+                      ? "#ec4899"
+                      : "rgba(255,255,255,0.7)",
+                    fontSize: 14,
+                    position: "relative",
+                    transition: "all 0.3s ease",
+
+                    "&:hover": { color: "#ec4899" },
+
+                    "&::after": {
+                      content: '""',
+                      position: "absolute",
+                      left: 0,
+                      bottom: -6,
+                      width: active ? "100%" : 0,
+                      height: "2px",
+                      backgroundColor: "#ec4899",
+                      transition: "width 0.3s ease",
+                    },
+
+                    "&:hover::after": { width: "100%" },
+                  }}
+                >
+                  <Box
+                    component="img"
+                    src={item.icon}
+                    alt={item.label}
+                    sx={{ width: 20, height: 20 }}
+                  />
+                  <Typography
+                    component="span"
+                    sx={{ fontWeight: active ? 600 : 400 }}
+                  >
+                    {item.label}
+                  </Typography>
+                </Box>
+              );
+            })}
+          </Box>
+
+          {/* Mobile Menu Button */}
+          <IconButton
+            onClick={() => setOpen(true)}
+            sx={{
+              display: { xs: "flex", md: "none" },
+              color: "#fff",
+            }}
+          >
+            <MenuIcon />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+
+      {/* Mobile Drawer */}
+      <Drawer
+        anchor="right"
+        open={open}
+        onClose={() => setOpen(false)}
+        PaperProps={{
+          sx: {
+            width: 260,
+            backgroundColor: "#1f1f1f",
+            color: "#fff",
+          },
+        }}
+      >
+        <Box sx={{ p: 3, display: "flex", flexDirection: "column", gap: 3 }}>
+          {navItems.map((item) => {
+            const active = pathname === item.path;
+
+            return (
+              <Box
+                key={item.path}
+                component={Link}
+                to={item.path}
+                onClick={() => setOpen(false)}
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 2,
+                  textDecoration: "none",
+                  color: active ? "#ec4899" : "#fff",
+                  fontSize: 16,
+                  fontWeight: active ? 600 : 400,
+                }}
+              >
+                <Box
+                  component="img"
+                  src={item.icon}
+                  alt={item.label}
+                  sx={{ width: 22, height: 22 }}
+                />
+                {item.label}
+              </Box>
+            );
+          })}
+        </Box>
+      </Drawer>
+    </>
   );
 };

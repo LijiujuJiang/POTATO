@@ -1,10 +1,14 @@
-import { Layout } from "./components/Layout";
-import { Hero } from "./components/sections/Hero";
+import { useState } from "react";
+import {
+  RouterProvider,
+} from "react-router-dom";
+import routers from "./router"
 function App() {
-  return <Layout title="POTATO">
-    <Hero />
-  </Layout>;
-  
+  const [count, setCount] = useState(0);
+
+  return (
+<RouterProvider router={routers} />
+  );
 }
 
-export default App
+export default App;

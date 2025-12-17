@@ -1,25 +1,18 @@
+import { Outlet } from "react-router-dom";
 import { Navbar } from "./elements/Navbar";
 import { Footer } from "./elements/Footer";
-import { useEffect } from "react";
-interface LayoutProps {
-    title: string;
-    children: React.ReactNode;
-}
 
-export const Layout = ({title, children}: LayoutProps) => {
-    useEffect(() => {
-        document.title = title;
-    }, [title]);
+export const Layout = () => {
+  return (
+    <div className="min-h-screen flex flex-col bg-gray-900">
+      <Navbar />
 
-    return (
-     <>
-        <Navbar />
+      {/* 页面主体 */}
+      <main className="flex-1">
+        <Outlet />
+      </main>
 
-        <main className="flex flex-col gap-y-20 md:gap-y-32 overflow-hidden">
-            {children}
-        </main>
-
-        <Footer />
-     </>
-    );
-}
+      <Footer />
+    </div>
+  );
+};

@@ -1,0 +1,7 @@
+
+{
+  "type": "module",
+  "scripts": {
+    "dev": "node --loader ts-node/esm src/index.ts"
+  }
+}

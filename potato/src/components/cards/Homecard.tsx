@@ -5,6 +5,7 @@ type CardItem = {
   image: string;
   title: string;
   desc: string;
+  link: string;
 };
 
 const cardData: CardItem[] = [
@@ -12,16 +13,19 @@ const cardData: CardItem[] = [
     image: "/images/demo1.jpg",
     title: "Design System",
     desc: "统一的设计语言与组件规范，提升产品一致性与开发效率。",
+    link: "/link1"
   },
   {
     image: "/images/demo2.jpg",
     title: "Motion Experience",
     desc: "克制而精准的动效设计，让交互反馈更自然、更高级。",
+    link: "/link2"
   },
   {
     image: "/images/demo3.jpg",
     title: "Engineering Quality",
     desc: "工程与体验并重，确保性能、可维护性与可扩展性。",
+    link: "/link3"
   },
 ];
 

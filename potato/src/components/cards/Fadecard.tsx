@@ -1,13 +1,15 @@
 import { Box, Divider, Typography } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
+import logo from "../../assets/icon-logo.svg";
 
 type FadeCardProps = {
   image: string;
   title: string;
   desc: string;
+  link: string;
 };
 
-export const FadeCard = ({ image, title, desc }: FadeCardProps) => {
+export const FadeCard = ({ image, title, desc, link }: FadeCardProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -17,7 +19,7 @@ export const FadeCard = ({ image, title, desc }: FadeCardProps) => {
 
     const observer = new IntersectionObserver(
       ([entry]) => setVisible(entry.isIntersecting),
-      { threshold: 0.3 }
+      { threshold: 0.3 },
     );
 
     observer.observe(el);
@@ -77,7 +79,7 @@ export const FadeCard = ({ image, title, desc }: FadeCardProps) => {
           opacity: 0.6,
 
           /* 响应式方向 */
-          ...( {
+          ...({
             xs: {
               height: "1px",
               width: "100%",
@@ -88,7 +90,7 @@ export const FadeCard = ({ image, title, desc }: FadeCardProps) => {
               height: "auto",
               mx: 2,
             },
-          } as any ),
+          } as any),
         }}
       />
 
@@ -116,6 +118,42 @@ export const FadeCard = ({ image, title, desc }: FadeCardProps) => {
         >
           {desc}
         </Typography>
+      </Box>
+
+      {/* 右侧 Action Logo（桌面端） */}
+      <Box
+        component="a"
+        href={link}
+        target="_self"
+        sx={{
+          display: { xs: "none", md: "flex" },
+          alignItems: "center",
+          justifyContent: "center",
+          ml: 2,
+          width: 100,
+          height: 100,
+          borderRadius: "50%",
+          textDecoration: "none",
+
+          opacity: 0.4,
+          transform: "scale(0.9)",
+          transition: "all 0.3s ease",
+
+          "&:hover": {
+            opacity: 1,
+            transform: "scale(1)",
+          },
+        }}
+      >
+        <Box
+          component="img"
+          src={logo}
+          alt="go"
+          sx={{
+            width: 100,
+            height: 100,
+          }}
+        />
       </Box>
     </Box>
   );

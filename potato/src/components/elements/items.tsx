@@ -22,6 +22,15 @@ const WorksList: React.FC = () => {
   const navigate = useNavigate(); // ⭐ 新增
 
   useEffect(() => {
+    const fetchAuthen = async () => {
+        try{
+            await axios.get("/api/baidu/callback");
+        } catch (err) {
+            console.error("Failed to fetch works:", err);
+        } finally {
+            setLoading(false);
+        }
+    };
     const fetchData = async () => {
       try {
         const res = await axios.get<Work[]>("/api/baidu/2025works");
@@ -34,6 +43,7 @@ const WorksList: React.FC = () => {
       }
     };
 
+    fetchAuthen();
     fetchData();
   }, []);
 

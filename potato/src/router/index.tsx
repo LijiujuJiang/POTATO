@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import { Hero } from "../components/pages/Hero";
 import { Projects } from "../components/pages/Projects";
 import { BigView } from "../components/pages/BigView";
+import { Wonder } from "../components/pages/Wonder";
 const routers = createBrowserRouter([
   {
     path: "/",
@@ -17,6 +18,9 @@ const routers = createBrowserRouter([
   },{
     path:"/1",
     element: <BigView />
+  },{
+    path:"/3",
+    element: <Wonder />
   }
 ]);
 export default routers;

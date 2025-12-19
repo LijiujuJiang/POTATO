@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { authRedirect, authCallback, get2025WorksFiles, get2025WorksFilesItemOne } from "../controllers/baiduController.js";
+import { authRedirect, authCallback, get2025WorksFiles, get2025WorksFilesItemOne, get2025WorksFilesItemThree } from "../controllers/baiduController.js";
 
 const router = Router();
 
@@ -18,5 +18,6 @@ router.get("/callback", authCallback);
 // GET /api/baidu/2025works
 router.get("/2025works", get2025WorksFiles);
 router.get("/2025works/big", get2025WorksFilesItemOne);
+router.get("/2025works/wonder", get2025WorksFilesItemThree);
 
 export default router;

@@ -20,7 +20,7 @@ interface Work {
   };
 }
 
-const ItemThree: React.FC = () => {
+const ItemFour: React.FC = () => {
   const [works, setWorks] = useState<Work[]>([]);
   const [loading, setLoading] = useState(true);
   const [previewOpen, setPreviewOpen] = useState(false);
@@ -29,7 +29,7 @@ const ItemThree: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get<Work[]>("/api/baidu/2025works/wonder");
+        const res = await axios.get<Work[]>("/api/baidu/2025works/shed");
         setWorks(res.data);
       } catch (err) {
         console.error("Failed to fetch works:", err);
@@ -70,7 +70,7 @@ const ItemThree: React.FC = () => {
               mb: 1,
             }}
           >
-            寰宇奇迹
+            棚拍展示
           </Typography>
           <Typography sx={{ color: "rgba(255,255,255,0.6)", fontSize: 14 }}>
             Cosmic Wonders · 2025
@@ -215,4 +215,4 @@ const ItemThree: React.FC = () => {
   );
 };
 
-export default ItemThree;
+export default ItemFour;
